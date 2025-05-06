@@ -9,7 +9,10 @@ function Contact() {
         Contact
       </Typography>
       <Typography variant="body1" paragraph sx={{ mb: 4 }}>
-        Provide contact information. Links to social media profiles.
+        If you would like to get in touch, feel free to reach out via email or connect with me on LinkedIn or GitHub. I am always open to discussing new opportunities, collaborations, or just having a chat about technology and web development.
+        <br />
+        <br />
+        I look forward to hearing from you!
       </Typography>
       
       <Stack direction="row" spacing={2}>

@@ -1,5 +1,5 @@
 // src/context/ThemeContext.jsx
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useMemo, useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -165,11 +165,23 @@ const darkTheme = createTheme({
 });
 
 export function CustomThemeProvider({ children }) {
-  // Start with light theme by default
-  const [mode, setMode] = useState('light');
+  // Check localStorage for saved theme preference, fallback to 'light'
+  const [mode, setMode] = useState(() => {
+    // Get saved theme from localStorage if available
+    const savedTheme = localStorage.getItem('theme-mode');
+    return savedTheme || 'light';
+  });
+
+  // Effect to sync with localStorage when theme changes
+  useEffect(() => {
+    localStorage.setItem('theme-mode', mode);
+  }, [mode]);
 
   const toggleTheme = () => {
-    setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setMode((prev) => {
+      const newMode = prev === 'light' ? 'dark' : 'light';
+      return newMode;
+    });
   };
 
   const theme = useMemo(() => (mode === 'light' ? lightTheme : darkTheme), [mode]);

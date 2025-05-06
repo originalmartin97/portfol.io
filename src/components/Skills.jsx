@@ -192,7 +192,9 @@ function Skills() {
         Skills
       </Typography>
       <Typography variant="body1" paragraph sx={{ mb: 4 }}>
-        List relevant technical and other skills. Visually appealing presentation.
+        Here are some of the skills I have acquired over the years. I am always eager to learn new technologies and improve my skill set.
+        I have experience with a variety of programming languages, frameworks, and tools. My goal is to continuously grow as a developer and stay up-to-date with the latest trends in technology.
+        I am particularly interested in web development, cloud computing, and machine learning. I enjoy working on challenging projects that push my limits and allow me to explore new ideas.
       </Typography>
       
       <Grid container spacing={2}>

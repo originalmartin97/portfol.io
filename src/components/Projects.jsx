@@ -8,7 +8,9 @@ function Projects() {
         Projects
       </Typography>
       <Typography variant="body1" paragraph sx={{ mb: 4 }}>
-        Showcase selected projects. Detailed descriptions, images, or demos.
+        Here you can find some of my projects. I have worked on various projects, including personal and client work. Each project showcases my skills and expertise in web development.
+        I have experience with a variety of technologies and frameworks, and I am always eager to learn new ones. If you are interested in collaborating on a project or have any questions, feel free to reach out!
+        I am always open to new opportunities and challenges. Let's create something amazing together!
       </Typography>
       
       <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
@@ -50,7 +52,7 @@ function Projects() {
               <CardActions sx={{ mt: 'auto', px: 0 }}>
                 <Button
                   size="small"
-                  color="primary"
+                  color="warning"
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"

@@ -5,7 +5,9 @@ const skills = [
   { label: "Material UI", color: "primary" },
   { label: "Docker", color: "info" },
   { label: "Git", color: "success" },
-  { label: "Node.js", color: "secondary" },
+  { label: "C/C++", color: "secondary" },
+  { label: "Cuda", color: "success" },
+  { label: "Python", color: "success" },
 ];
 
 export default skills;
