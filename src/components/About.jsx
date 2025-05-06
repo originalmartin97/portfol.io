@@ -802,9 +802,15 @@ function About() {
   }, []);
 
   return (
-    <Grid container spacing={4} alignItems="center">
+    <Grid container spacing={{ xs: 2, sm: 4 }} alignItems="center">
       <Grid item xs={12} md={7}>
-        <Typography variant="h1" component="h1" gutterBottom sx={{ fontWeight: 500 }}>
+        <Typography variant="h1" component="h1" gutterBottom 
+          sx={{ 
+            fontWeight: 500,
+            fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' }, // Smaller font on small screens
+            wordBreak: 'break-word' // Ensure text wraps properly
+          }}
+        >
           Hello, I'm<br/>
           {about.name}
         </Typography>
@@ -880,8 +886,8 @@ function About() {
             src={about.profilePic}
             alt={about.name}
             sx={{
-              width: { xs: 200, md: 300 },
-              height: { xs: 200, md: 300 },
+              width: { xs: 180, sm: 200, md: 300 }, // Smaller on very small screens
+              height: { xs: 180, sm: 200, md: 300 }, // Smaller on very small screens
               boxShadow: 3,
               position: 'relative',
               zIndex: 3

@@ -3,7 +3,7 @@ import projects from '../data/projects';
 
 function Projects() {
   return (
-    <Box>
+    <Box sx={{ overflow: 'hidden', width: '100%' }}>
       <Typography variant="h2" component="h2" gutterBottom>
         Projects
       </Typography>
@@ -23,28 +23,39 @@ function Projects() {
                 display: 'flex', 
                 flexDirection: 'column',
                 bgcolor: 'transparent',
-                borderRadius: 0
+                borderRadius: 0,
+                maxWidth: '100%', // Ensure card doesn't exceed parent width
               }}
             >
-              <CardMedia
-                component="img"
-                sx={{
-                  height: { xs: 200, sm: 240, md: 280 },
-                  objectFit: 'cover',
-                }}
-                image={project.image}
-                alt={project.title}
-              />
-              <CardContent sx={{ px: 0 }}>
+              <Box sx={{ width: '100%', overflow: 'hidden' }}> {/* Container to constrain image */}
+                <CardMedia
+                  component="img"
+                  sx={{
+                    height: { xs: 160, sm: 200, md: 240 }, // Reduce height on small screens
+                    objectFit: 'cover',
+                    width: '100%', // Ensure image takes full width of container
+                    maxWidth: '100%', // Prevent image from overflowing
+                  }}
+                  image={project.image}
+                  alt={project.title}
+                />
+              </Box>
+              <CardContent sx={{ px: 0, width: '100%' }}> {/* Ensure content stays within bounds */}
                 <Typography 
                   gutterBottom 
                   variant="h5" 
                   component="div"
+                  sx={{
+                    fontSize: { xs: '1.15rem', sm: '1.5rem' },
+                    wordBreak: 'break-word', // Handle long titles
+                    width: '100%',
+                  }}
                 >
                   {project.title}
                 </Typography>
                 <Typography 
                   variant="body2"
+                  sx={{ wordBreak: 'break-word' }} // Handle long text
                 >
                   {project.description}
                 </Typography>

@@ -9,14 +9,23 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 0 }}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          mt: 0,
+          // Add horizontal padding override for very small screens
+          px: { xs: 1, sm: 2 } 
+        }}
+      >
         <Box 
           id="about" 
           sx={{ 
-            py: { xs: 4, sm: 6 }, 
-            px: { xs: 2, sm: 4, md: 6 }, 
+            pt: 3,
+            pb: { xs: 4, sm: 6 }, 
+            px: { xs: 1, sm: 4, md: 6 }, // Reduce horizontal padding on mobile
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
             minHeight: '80vh',
+            overflow: 'hidden' // Prevent content overflow
           }}
         >
           <About />
@@ -28,9 +37,10 @@ function App() {
           id="projects" 
           sx={{ 
             py: { xs: 4, sm: 6 }, 
-            px: { xs: 2, sm: 4, md: 6 }, 
+            px: { xs: 1, sm: 4, md: 6 }, // Reduce horizontal padding on mobile
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '80vh' 
+            minHeight: '80vh',
+            overflow: 'hidden' // Prevent content overflow
           }}
         >
           <Projects />
@@ -42,9 +52,10 @@ function App() {
           id="skills" 
           sx={{ 
             py: { xs: 4, sm: 6 }, 
-            px: { xs: 2, sm: 4, md: 6 }, 
+            px: { xs: 1, sm: 4, md: 6 }, // Reduce horizontal padding on mobile
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '60vh' 
+            minHeight: '60vh',
+            overflow: 'hidden' // Prevent content overflow
           }}
         >
           <Skills />
@@ -56,10 +67,11 @@ function App() {
           id="contact" 
           sx={{ 
             py: { xs: 4, sm: 6 }, 
-            px: { xs: 2, sm: 4, md: 6 }, 
-            pb: { xs: 20, sm: 24 }, // Add extra bottom padding
+            px: { xs: 1, sm: 4, md: 6 }, // Reduce horizontal padding on mobile
+            pb: { xs: 20, sm: 24 },
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '60vh' 
+            minHeight: '60vh',
+            overflow: 'hidden' // Prevent content overflow
           }}
         >
           <Contact />

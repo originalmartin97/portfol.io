@@ -252,8 +252,9 @@ function Skills() {
                   label={skill.label}
                   color={skill.color}
                   sx={{ 
-                    fontSize: { xs: '0.875rem', sm: '1rem' },
-                    height: { xs: '32px', sm: '36px' },
+                    fontSize: { xs: '0.75rem', sm: '0.875rem', md: '1rem' }, // Even smaller text on tiny screens
+                    height: { xs: '28px', sm: '32px', md: '36px' }, // Shorter height on tiny screens
+                    maxWidth: '100%', // Ensure it doesn't overflow its container
                     fontWeight: 500,
                     position: 'relative',
                     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
