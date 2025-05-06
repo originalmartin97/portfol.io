@@ -34,10 +34,14 @@ function Skills() {
                   height: { xs: '32px', sm: '36px' },
                   fontWeight: 500,
                   position: 'relative',
+                  animation: `fadeIn 0.5s ease forwards`,
+                  animationDelay,
+                  opacity: 0, // Start with 0 opacity for fadeIn animation
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                   '&:hover': {
-                    animation: `${pulseBorder} 1.5s infinite`,
+                    opacity: 1, // Ensure opacity remains 1 on hover
                     transform: 'translateY(-3px)',
-                    transition: 'transform 0.3s ease'
+                    boxShadow: (theme) => `0 4px 8px ${theme.palette.mode === 'light' ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0.5)'}`,
                   },
                   '&::after': {
                     content: '""',
@@ -53,9 +57,6 @@ function Skills() {
                   '&:hover::after': {
                     opacity: 0.6,
                   },
-                  animation: `fadeIn 0.5s ease forwards`,
-                  animationDelay,
-                  opacity: 0,
                 }}
               />
             </Grid>

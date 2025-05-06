@@ -57,6 +57,7 @@ function App() {
           sx={{ 
             py: { xs: 4, sm: 6 }, 
             px: { xs: 2, sm: 4, md: 6 }, 
+            pb: { xs: 20, sm: 24 }, // Add extra bottom padding
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
             minHeight: '60vh' 
           }}

@@ -86,6 +86,13 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          transition: 'all 0.2s ease',
+        },
+      },
+    },
   },
 });
 
