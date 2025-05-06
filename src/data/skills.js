@@ -1,11 +1,11 @@
+// src/data/skills.js
 const skills = [
-    "JavaScript",
-    "React",
-    "Material UI",
-    "Docker",
-    "Git",
-    "Node.js",
-  ];
-  
-  export default skills;
-  
+  { label: "JavaScript", color: "warning" },
+  { label: "React", color: "primary" },
+  { label: "Material UI", color: "primary" },
+  { label: "Docker", color: "info" },
+  { label: "Git", color: "success" },
+  { label: "Node.js", color: "secondary" },
+];
+
+export default skills;
