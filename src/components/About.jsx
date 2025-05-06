@@ -1,5 +1,6 @@
 import { Typography, Box, Grid, Avatar } from '@mui/material';
 import { keyframes, styled } from '@mui/system';
+import { useState, useEffect } from 'react';
 import about from '../data/about';
 
 // Enhanced extreme glitch effects for profile picture
@@ -136,6 +137,36 @@ const flareEffect = keyframes`
   100% { transform: translateX(150%) rotate(45deg); opacity: 0; }
 `;
 
+// New animations for glitch symbols
+const symbolAppear = keyframes`
+  0% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  30% { opacity: 0.9; transform: scale(1.2) rotate(20deg); }
+  60% { opacity: 0.7; transform: scale(0.9) rotate(-15deg); }
+  80% { opacity: 0.9; transform: scale(1.1) rotate(5deg); }
+  100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+`;
+
+const symbolGlitch = keyframes`
+  0% { transform: translate(0, 0) skew(0, 0); filter: blur(0) hue-rotate(0deg); }
+  10% { transform: translate(3px, -2px) skew(10deg, 2deg); filter: blur(1px) hue-rotate(90deg); }
+  20% { transform: translate(-4px, 0) skew(-5deg, 0); filter: blur(0) hue-rotate(0deg); }
+  30% { transform: translate(0, 3px) skew(0, -10deg); filter: blur(2px) hue-rotate(-90deg); }
+  40% { transform: translate(2px, -2px) skew(-2deg, 5deg); filter: blur(0) hue-rotate(45deg); }
+  50% { transform: translate(0, 0) skew(0, 0); filter: blur(0) hue-rotate(0deg); }
+  60% { transform: translate(-3px, 1px) skew(5deg, -5deg); filter: blur(1px) hue-rotate(-45deg); }
+  70% { transform: translate(5px, 0) skew(0, 8deg); filter: blur(0) hue-rotate(90deg); }
+  80% { transform: translate(0, -3px) skew(-8deg, 0); filter: blur(2px) hue-rotate(180deg); }
+  90% { transform: translate(-2px, 2px) skew(3deg, -3deg); filter: blur(0) hue-rotate(-180deg); }
+  100% { transform: translate(0, 0) skew(0, 0); filter: blur(0) hue-rotate(0deg); }
+`;
+
+const codeMatrixEffect = keyframes`
+  0% { opacity: 0; transform: translateY(-20px); }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(20px); }
+`;
+
 // Styled wrapper for the extremely glitchy avatar
 const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -225,7 +256,22 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
       '&.blue': {
         animation: `${tearingEffect} 0.6s 0.2s infinite ease-in-out`,
       }
+    },
+    // Show glitch symbols
+    '.glitch-symbol-container': {
+      opacity: 1,
     }
+  },
+  // Container for glitch symbols - hidden by default
+  '.glitch-symbol-container': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0,
+    transition: 'opacity 0.2s',
+    pointerEvents: 'none',
   }
 }));
 
@@ -324,16 +370,178 @@ const TearLine = styled('div')(({ offset, width, delay }) => ({
   transition: 'opacity 0.2s',
 }));
 
+// New component for random glitch symbols
+const GlitchSymbol = styled('div')(({ top, left, size, delay, duration, inverse, color }) => ({
+  position: 'absolute',
+  top: `${top}%`,
+  left: `${left}%`,
+  fontFamily: 'monospace',
+  fontSize: `${size}rem`,
+  color: color || 'rgba(255, 255, 255, 0.8)',
+  textShadow: '0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.5)',
+  zIndex: 10,
+  opacity: 0,
+  transform: 'scale(0)',
+  pointerEvents: 'none',
+  animationName: `${symbolAppear}, ${symbolGlitch}`,
+  animationDuration: `${duration}s, 0.5s`,
+  animationDelay: `${delay}s, ${delay}s`,
+  animationIterationCount: inverse ? '1, infinite' : 'infinite, infinite',
+  animationTimingFunction: 'ease-in-out, linear',
+  animationDirection: inverse ? 'normal, alternate' : 'alternate, normal',
+}));
+
+// Component for matrix-like falling code effect
+const CodeMatrix = styled('div')(({ left, delay, size }) => ({
+  position: 'absolute',
+  top: '-20%',
+  left: `${left}%`,
+  color: '#0f0',
+  fontSize: `${size}rem`,
+  fontFamily: 'monospace',
+  textShadow: '0 0 5px rgba(0, 255, 0, 0.7)',
+  opacity: 0,
+  zIndex: 8,
+  animation: `${codeMatrixEffect} ${2 + Math.random() * 3}s ${delay}s infinite linear`,
+  pointerEvents: 'none',
+}));
+
+// Custom component for binary stream
+const BinaryStream = styled('div')(({ top, left, duration }) => ({
+  position: 'absolute',
+  top: `${top}%`,
+  left: `${left}%`,
+  fontFamily: 'monospace',
+  fontSize: '0.7rem',
+  color: 'rgba(0, 255, 255, 0.8)',
+  zIndex: 9,
+  opacity: 0,
+  transform: 'rotate(90deg)',
+  width: '20px', 
+  height: '100px',
+  overflow: 'hidden',
+  animation: `${codeMatrixEffect} ${duration}s infinite linear`,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  pointerEvents: 'none',
+}));
+
+// Arrays of glitchy symbols to display randomly
+const glitchSymbols = [
+  '⚠', '⚡', '⚙', '⛔', '⟁', '⌁', '⌘', '⍾', '⎔', '⎙', '▓', '█', '▒', '░', 
+  '☢', '☣', '⚛', '∞', '⌬', '⎊', '⌖', '⚔', '⚒', '⚕', '⚛', '⚫', '⚪', '✿', 
+  '∴', '∵', '✶', '✷', '✸', '✹', '✺', '✻', '✼', '❄', '❅', '❆', '❇',
+  '🔥', '💀', '👾', '🤖', '💣', '⏱', '🧠', '💻', '📡', '🛰️', '🔌'
+];
+
+const glitchText = [
+  'ERROR', 'VOID', 'GLITCH', 'SYSTEM FAILURE', 'CORRUPTED', 'DELETED',
+  '404', 'FATAL', 'OVERRIDE', 'BUFFER', 'SEGFAULT', 'NULL', 'UNDEF',
+  'ANOMALY', 'BREACH', 'CHAOS', 'ENTROPY', 'QUANTUM', 'PARADOX'
+];
+
+// Matrix-like code patterns
+const codePatterns = [
+  '10110101', '01001101', 'DEADBEEF', 'C0FFEE', 'sudo rm -rf', 
+  '</div>', '<h4ck3d/>', '{overflow:hidden}', 'div.corrupted', 
+  '255.255.255.0', 'localhost', 'bash -i >& /dev/tcp/'
+];
+
 function About() {
-  // Using the profilePic path from the data file
   const profilePath = about.profilePic;
   
   // Generate tear lines data
   const tearLines = Array.from({ length: 12 }, (_, i) => ({
-    offset: i * 8 + Math.random() * 4,  // Position vertically
-    width: 0.5 + Math.random() * 1.5,   // Line thickness
-    delay: Math.random() * 0.5,         // Animation delay
+    offset: i * 8 + Math.random() * 4,
+    width: 0.5 + Math.random() * 1.5,
+    delay: Math.random() * 0.5,
   }));
+
+  // Generate random glitch symbols
+  const [glitchElements, setGlitchElements] = useState([]);
+  
+  // Generate a new set of random glitch elements when hovered
+  useEffect(() => {
+    const generateRandomGlitchElements = () => {
+      const numSymbols = 8 + Math.floor(Math.random() * 7); // 8-14 symbols
+      const numTextElements = 3 + Math.floor(Math.random() * 3); // 3-5 text elements
+      const numCodeElements = 4 + Math.floor(Math.random() * 3); // 4-6 code elements
+      const numBinaryStreams = 2 + Math.floor(Math.random() * 3); // 2-4 binary streams
+      
+      const elements = [];
+      
+      // Add random symbols
+      for (let i = 0; i < numSymbols; i++) {
+        const symbol = glitchSymbols[Math.floor(Math.random() * glitchSymbols.length)];
+        elements.push({
+          type: 'symbol',
+          content: symbol,
+          top: Math.random() * 140 - 20, // -20% to 120%
+          left: Math.random() * 140 - 20, // -20% to 120%
+          size: 1 + Math.random() * 2, // 1-3rem
+          delay: Math.random() * 3,
+          duration: 1 + Math.random() * 3,
+          inverse: Math.random() > 0.5,
+          color: Math.random() > 0.6 ? 
+            `hsl(${Math.floor(Math.random() * 360)}, 100%, 70%)` : 
+            'rgba(255, 255, 255, 0.8)'
+        });
+      }
+      
+      // Add random glitch text
+      for (let i = 0; i < numTextElements; i++) {
+        const text = glitchText[Math.floor(Math.random() * glitchText.length)];
+        elements.push({
+          type: 'text',
+          content: text,
+          top: Math.random() * 140 - 20,
+          left: Math.random() * 140 - 20,
+          size: 0.5 + Math.random() * 0.8, // 0.5-1.3rem
+          delay: Math.random() * 2.5,
+          duration: 2 + Math.random() * 2,
+          inverse: Math.random() > 0.7,
+          color: Math.random() > 0.7 ? 
+            `rgba(255, ${Math.floor(Math.random() * 100) + 100}, ${Math.floor(Math.random() * 100) + 100}, 0.9)` : 
+            'rgba(0, 255, 255, 0.8)'
+        });
+      }
+      
+      // Add code matrix elements
+      for (let i = 0; i < numCodeElements; i++) {
+        const code = codePatterns[Math.floor(Math.random() * codePatterns.length)];
+        elements.push({
+          type: 'code',
+          content: code,
+          left: Math.random() * 100,
+          delay: Math.random() * 3,
+          size: 0.5 + Math.random() * 0.5, // 0.5-1rem
+        });
+      }
+      
+      // Add binary streams
+      for (let i = 0; i < numBinaryStreams; i++) {
+        elements.push({
+          type: 'binary',
+          content: Array(15).fill(0).map(() => Math.random() > 0.5 ? '1' : '0').join(''),
+          top: Math.random() * 100,
+          left: Math.random() * 100,
+          duration: 1.5 + Math.random() * 2,
+        });
+      }
+      
+      return elements;
+    };
+    
+    // Generate initial elements and set up a timer to regenerate them
+    setGlitchElements(generateRandomGlitchElements());
+    
+    const intervalId = setInterval(() => {
+      setGlitchElements(generateRandomGlitchElements());
+    }, 5000); // Regenerate every 5 seconds
+    
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <Grid container spacing={4} alignItems="center">
@@ -403,6 +611,10 @@ function About() {
                 yChannelSelector="G" 
               />
             </filter>
+            <filter id="textDistort">
+              <feTurbulence baseFrequency="0.05" numOctaves="2" result="turbulence" />
+              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" />
+            </filter>
           </defs>
         </svg>
         
@@ -423,6 +635,53 @@ function About() {
           <AvatarGlitchClone image={profilePath} className="red avatar-glitch-clone" />
           <AvatarGlitchClone image={profilePath} className="green avatar-glitch-clone" />
           <AvatarGlitchClone image={profilePath} className="blue avatar-glitch-clone" />
+          
+          {/* Random glitch symbols container */}
+          <Box className="glitch-symbol-container">
+            {glitchElements.map((element, index) => {
+              if (element.type === 'symbol' || element.type === 'text') {
+                return (
+                  <GlitchSymbol 
+                    key={index}
+                    top={element.top}
+                    left={element.left}
+                    size={element.size}
+                    delay={element.delay}
+                    duration={element.duration}
+                    inverse={element.inverse}
+                    color={element.color}
+                  >
+                    {element.content}
+                  </GlitchSymbol>
+                );
+              } else if (element.type === 'code') {
+                return (
+                  <CodeMatrix
+                    key={index}
+                    left={element.left}
+                    delay={element.delay}
+                    size={element.size}
+                  >
+                    {element.content}
+                  </CodeMatrix>
+                );
+              } else if (element.type === 'binary') {
+                return (
+                  <BinaryStream
+                    key={index}
+                    top={element.top}
+                    left={element.left}
+                    duration={element.duration}
+                  >
+                    {element.content.split('').map((bit, i) => (
+                      <span key={i} style={{ opacity: Math.random() * 0.7 + 0.3 }}>{bit}</span>
+                    ))}
+                  </BinaryStream>
+                );
+              }
+              return null;
+            })}
+          </Box>
           
           {/* Scan lines effect */}
           <ScanLines className="scan-lines" />
