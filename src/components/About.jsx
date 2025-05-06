@@ -167,35 +167,280 @@ const codeMatrixEffect = keyframes`
   100% { opacity: 0; transform: translateY(20px); }
 `;
 
-// Styled wrapper for the extremely glitchy avatar
+// Add these new keyframes for the glitchy border effect
+const glitchyBorder = keyframes`
+  0% { 
+    clip-path: circle(50% at 50% 50%); 
+    border-color: rgba(0, 255, 255, 0.7);
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  10% { 
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    border-color: rgba(255, 0, 0, 0.8);
+    opacity: 0.8;
+    transform: scale(1.02) rotate(1deg);
+  }
+  20% { 
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    border-color: rgba(0, 255, 0, 0.7); 
+    opacity: 0.5;
+    transform: scale(0.98) rotate(-1deg);
+  }
+  30% { 
+    clip-path: circle(50% at 50% 50%);
+    border-color: rgba(255, 255, 255, 0.8);
+    opacity: 0.2;
+    transform: scale(1.05);
+  }
+  40% { 
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+    border-color: rgba(255, 0, 255, 0.6);
+    opacity: 0.9;
+    transform: scale(1) skew(2deg, 0deg);
+  }
+  50% { 
+    clip-path: ellipse(50% 50% at 50% 50%);
+    border-color: rgba(0, 255, 255, 0.5);
+    opacity: 0;
+    transform: scale(1.1) skew(-2deg, 0deg);
+  }
+  60% { 
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    border-color: rgba(255, 255, 0, 0.7);
+    opacity: 0.7;
+    transform: scale(0.95) rotate(2deg);
+  }
+  70% { 
+    clip-path: ellipse(40% 50% at 50% 50%);
+    border-color: rgba(0, 255, 255, 0.8);
+    opacity: 0.3;
+    transform: scale(1.08) rotate(-1deg);
+  }
+  80% { 
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    border-color: rgba(255, 0, 0, 0.5);
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  90% { 
+    clip-path: circle(40% at 50% 50%);
+    border-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.6;
+    transform: scale(1.03) skew(0deg, 2deg);
+  }
+  100% { 
+    clip-path: circle(50% at 50% 50%);
+    border-color: rgba(0, 255, 255, 0.7);
+    opacity: 0.3;
+    transform: scale(1);
+  }
+`;
+
+const glitchyBorder2 = keyframes`
+  0% { 
+    clip-path: circle(45% at 50% 50%); 
+    border-color: rgba(255, 0, 0, 0.4);
+    opacity: 0.2;
+    transform: scale(1.1);
+  }
+  15% { 
+    clip-path: polygon(65% 0%, 90% 50%, 65% 100%, 10% 100%, 35% 50%, 10% 0%);
+    border-color: rgba(0, 255, 255, 0.6);
+    opacity: 0.7;
+    transform: scale(0.95) rotate(-1.5deg);
+  }
+  30% { 
+    clip-path: polygon(40% 0%, 90% 35%, 72% 100%, 28% 100%, 10% 35%);
+    border-color: rgba(255, 255, 0, 0.5); 
+    opacity: 0;
+    transform: scale(1.05) rotate(1deg);
+  }
+  45% { 
+    clip-path: ellipse(45% 45% at 50% 50%);
+    border-color: rgba(255, 0, 255, 0.7);
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  60% { 
+    clip-path: polygon(60% 0%, 100% 30%, 90% 70%, 65% 100%, 35% 100%, 10% 70%, 0% 30%);
+    border-color: rgba(0, 255, 0, 0.5);
+    opacity: 0.2;
+    transform: scale(1.12) skew(-1deg, 1deg);
+  }
+  75% { 
+    clip-path: circle(48% at 52% 48%);
+    border-color: rgba(255, 0, 0, 0.6);
+    opacity: 0.8;
+    transform: scale(1) skew(1deg, -1deg);
+  }
+  90% { 
+    clip-path: polygon(55% 0%, 100% 35%, 90% 85%, 40% 100%, 10% 85%, 0% 35%);
+    border-color: rgba(0, 255, 255, 0.5);
+    opacity: 0;
+    transform: scale(0.98) rotate(-2deg);
+  }
+  100% { 
+    clip-path: circle(45% at 50% 50%);
+    border-color: rgba(255, 0, 0, 0.4);
+    opacity: 0.2;
+    transform: scale(1.1);
+  }
+`;
+
+const borderGlitch = keyframes`
+  0% { border-width: 3px; }
+  10% { border-width: 5px; }
+  20% { border-width: 1px; }
+  30% { border-width: 4px; }
+  40% { border-width: 2px; }
+  50% { border-width: 6px; }
+  60% { border-width: 3px; }
+  70% { border-width: 5px; }
+  80% { border-width: 2px; }
+  90% { border-width: 4px; }
+  100% { border-width: 3px; }
+`;
+
+// Add this new animation for shape distortion
+const shapeShift = keyframes`
+  0% { 
+    border-radius: 50%;
+    clip-path: circle(50% at 50% 50%);
+  }
+  10% { 
+    border-radius: 0;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  }
+  20% {
+    clip-path: polygon(50% 0%, 80% 30%, 100% 0%, 100% 70%, 80% 100%, 50% 70%, 20% 100%, 0% 70%, 0% 0%, 20% 30%);
+  }
+  30% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 25% 100%, 25% 75%, 0% 75%);
+  }
+  40% {
+    border-radius: 0% 70% 0% 70%;
+    clip-path: none;
+  }
+  50% {
+    border-radius: 50%;
+    clip-path: ellipse(30% 50% at 50% 50%);
+  }
+  60% {
+    border-radius: 20% 0% 20% 0%;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+  }
+  70% {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  80% {
+    clip-path: circle(40% at 60% 40%);
+  }
+  90% {
+    border-radius: 70% 0% 70% 0%;
+    clip-path: none;
+  }
+  100% { 
+    border-radius: 50%;
+    clip-path: circle(50% at 50% 50%);
+  }
+`;
+
+// Add a jagged, glitchy shape animation
+const jagggedShape = keyframes`
+  0% {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  10% {
+    clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+  }
+  20% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  30% {
+    clip-path: polygon(50% 0%, 50% 30%, 100% 30%, 100% 70%, 50% 70%, 50% 100%, 0% 100%, 0% 0%);
+  }
+  40% {
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 40% 0%, 50% 30%, 60% 0%, 100% 0%, 100% 100%, 70% 100%, 50% 70%, 30% 100%, 0% 100%);
+  }
+  60% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 55% 70%, 55% 100%, 45% 100%, 45% 70%, 0% 70%);
+  }
+  70% {
+    clip-path: polygon(0% 30%, 30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%);
+  }
+  80% {
+    clip-path: polygon(50% 0%, 61% 20%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 31% 57%, 2% 35%, 39% 20%);
+  }
+  90% {
+    clip-path: polygon(0% 0%, 20% 0%, 20% 20%, 40% 20%, 40% 0%, 60% 0%, 60% 20%, 80% 20%, 80% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+`;
+
+// Add random digital break animation
+const digitalBreak = keyframes`
+  0%, 100% { 
+    clip-path: inset(0 0 0 0);
+  }
+  10% {
+    clip-path: inset(15% 0 15% 0);
+  }
+  20% {
+    clip-path: inset(0 15% 0 15%);
+  }
+  30% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 60%);
+  }
+  40% {
+    clip-path: polygon(0% 0%, 33% 0%, 33% 100%, 66% 100%, 66% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  60% {
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 25% 0%, 25% 50%, 75% 50%, 75% 0%);
+  }
+  70% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 75% 100%, 75% 25%, 25% 25%, 25% 75%, 75% 75%, 75% 100%, 0% 100%);
+  }
+  80% {
+    clip-path: inset(15% 15% 15% 15%);
+  }
+  90% {
+    clip-path: inset(0 0 0 0);
+  }
+`;
+
 const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
   position: 'relative',
   borderRadius: '50%',
   overflow: 'visible',
   '&:hover': {
-    '&::before': {
+    '&::before, &::after': {
       content: '""',
       position: 'absolute',
       inset: '-15px',
-      borderRadius: '50%',
-      background: 'rgba(0,0,0,0)',
-      border: `3px solid ${theme.palette.mode === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)'}`,
+      borderRadius: '0',
+      background: 'transparent',
+      pointerEvents: 'none',
       zIndex: -1,
-      animation: `${voidPulse} 1.2s infinite cubic-bezier(0.36, 0, 0.66, -0.56)`,
+    },
+    '&::before': {
+      border: `4px solid ${theme.palette.mode === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.8)'}`,
+      animation: `${glitchyBorder} 8s infinite cubic-bezier(0.36, 0, 0.66, 1), ${borderGlitch} 3s infinite steps(10)`,
     },
     '&::after': {
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      borderRadius: '50%',
-      background: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.75' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-      backgroundSize: '200% 200%',
-      mixBlendMode: 'color-dodge',
-      opacity: 0.5,
-      animation: `${staticNoise} 0.15s infinite steps(2)`,
-      zIndex: 5,
+      border: `2px dashed ${theme.palette.mode === 'light' ? 'rgba(255,0,0,0.4)' : 'rgba(0,255,255,0.6)'}`,
+      animation: `${glitchyBorder2} 7s infinite cubic-bezier(0.36, 0, 0.66, 1) reverse`,
+      animationDelay: '0.3s',
     },
-    '& .MuiAvatar-root': {
+    '.MuiAvatar-root': {
       animation: `${severeBrokenAnimation} 3s infinite alternate`,
       filter: 'contrast(1.2)',
       '&::before': {
@@ -227,23 +472,15 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
         zIndex: 2,
       },
     },
-    // Scan line effect
-    '.scan-lines': {
-      opacity: 0.7,
-    },
-    // Flare effect element
+    '.scan-lines': { opacity: 0.7 },
     '.flare-effect': {
       opacity: 1,
       animation: `${flareEffect} 3s infinite ease-in-out`,
     },
-    // Tearing effect elements
     '.tearing-container': {
       opacity: 1,
-      '& .tear-line': {
-        opacity: 1,
-      }
+      '& .tear-line': { opacity: 1 },
     },
-    // RGB channel clones
     '.avatar-glitch-clone': {
       opacity: 0.7,
       animation: `${rgbSplitEffect} 2s infinite alternate`,
@@ -257,12 +494,8 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
         animation: `${tearingEffect} 0.6s 0.2s infinite ease-in-out`,
       }
     },
-    // Show glitch symbols
-    '.glitch-symbol-container': {
-      opacity: 1,
-    }
+    '.glitch-symbol-container': { opacity: 1 },
   },
-  // Container for glitch symbols - hidden by default
   '.glitch-symbol-container': {
     position: 'absolute',
     top: 0,
@@ -275,7 +508,41 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
   }
 }));
 
-// Clone images for the RGB splitting effect - enhanced
+const GlitchySurround = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  top: '-10px',
+  left: '-10px',
+  right: '-10px',
+  bottom: '-10px',
+  background: 'transparent',
+  zIndex: -2,
+  opacity: 0,
+  transition: 'opacity 0.2s',
+  pointerEvents: 'none',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background: theme.palette.mode === 'light' 
+      ? 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,80,255,0.2), rgba(0,0,0,0.1))'
+      : 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(0,255,255,0.2), rgba(255,255,255,0.1))',
+    clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
+    animation: `${glitchyBorder} 10s infinite alternate cubic-bezier(0.36, 0, 0.66, 1)`,
+    opacity: 0.5,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: '-5px',
+    background: 'transparent',
+    border: theme.palette.mode === 'light'
+      ? '1px dashed rgba(0,0,0,0.2)'
+      : '1px dashed rgba(255,255,255,0.3)',
+    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+    animation: `${glitchyBorder2} 8s infinite reverse cubic-bezier(0.36, 0, 0.66, 1)`,
+  }
+}));
+
 const AvatarGlitchClone = styled('div')(({ theme, image }) => ({
   position: 'absolute',
   top: 0,
@@ -304,7 +571,6 @@ const AvatarGlitchClone = styled('div')(({ theme, image }) => ({
   }
 }));
 
-// Scan line effect component
 const ScanLines = styled('div')(({ theme }) => ({
   position: 'absolute',
   top: 0,
@@ -327,7 +593,6 @@ const ScanLines = styled('div')(({ theme }) => ({
   transition: 'opacity 0.2s',
 }));
 
-// Flare effect component
 const Flare = styled('div')({
   position: 'absolute',
   top: '-100%',
@@ -343,7 +608,6 @@ const Flare = styled('div')({
   transition: 'opacity 0.2s',
 });
 
-// Tearing container
 const TearingContainer = styled('div')({
   position: 'absolute',
   top: 0,
@@ -357,7 +621,6 @@ const TearingContainer = styled('div')({
   transition: 'opacity 0.2s',
 });
 
-// Individual tear line
 const TearLine = styled('div')(({ offset, width, delay }) => ({
   position: 'absolute',
   top: `${offset}%`,
@@ -370,7 +633,6 @@ const TearLine = styled('div')(({ offset, width, delay }) => ({
   transition: 'opacity 0.2s',
 }));
 
-// New component for random glitch symbols
 const GlitchSymbol = styled('div')(({ top, left, size, delay, duration, inverse, color }) => ({
   position: 'absolute',
   top: `${top}%`,
@@ -391,7 +653,6 @@ const GlitchSymbol = styled('div')(({ top, left, size, delay, duration, inverse,
   animationDirection: inverse ? 'normal, alternate' : 'alternate, normal',
 }));
 
-// Component for matrix-like falling code effect
 const CodeMatrix = styled('div')(({ left, delay, size }) => ({
   position: 'absolute',
   top: '-20%',
@@ -406,7 +667,6 @@ const CodeMatrix = styled('div')(({ left, delay, size }) => ({
   pointerEvents: 'none',
 }));
 
-// Custom component for binary stream
 const BinaryStream = styled('div')(({ top, left, duration }) => ({
   position: 'absolute',
   top: `${top}%`,
@@ -427,7 +687,6 @@ const BinaryStream = styled('div')(({ top, left, duration }) => ({
   pointerEvents: 'none',
 }));
 
-// Arrays of glitchy symbols to display randomly
 const glitchSymbols = [
   '⚠', '⚡', '⚙', '⛔', '⟁', '⌁', '⌘', '⍾', '⎔', '⎙', '▓', '█', '▒', '░', 
   '☢', '☣', '⚛', '∞', '⌬', '⎊', '⌖', '⚔', '⚒', '⚕', '⚛', '⚫', '⚪', '✿', 
@@ -441,7 +700,6 @@ const glitchText = [
   'ANOMALY', 'BREACH', 'CHAOS', 'ENTROPY', 'QUANTUM', 'PARADOX'
 ];
 
-// Matrix-like code patterns
 const codePatterns = [
   '10110101', '01001101', 'DEADBEEF', 'C0FFEE', 'sudo rm -rf', 
   '</div>', '<h4ck3d/>', '{overflow:hidden}', 'div.corrupted', 
@@ -451,35 +709,31 @@ const codePatterns = [
 function About() {
   const profilePath = about.profilePic;
   
-  // Generate tear lines data
   const tearLines = Array.from({ length: 12 }, (_, i) => ({
     offset: i * 8 + Math.random() * 4,
     width: 0.5 + Math.random() * 1.5,
     delay: Math.random() * 0.5,
   }));
 
-  // Generate random glitch symbols
   const [glitchElements, setGlitchElements] = useState([]);
   
-  // Generate a new set of random glitch elements when hovered
   useEffect(() => {
     const generateRandomGlitchElements = () => {
-      const numSymbols = 8 + Math.floor(Math.random() * 7); // 8-14 symbols
-      const numTextElements = 3 + Math.floor(Math.random() * 3); // 3-5 text elements
-      const numCodeElements = 4 + Math.floor(Math.random() * 3); // 4-6 code elements
-      const numBinaryStreams = 2 + Math.floor(Math.random() * 3); // 2-4 binary streams
+      const numSymbols = 8 + Math.floor(Math.random() * 7);
+      const numTextElements = 3 + Math.floor(Math.random() * 3);
+      const numCodeElements = 4 + Math.floor(Math.random() * 3);
+      const numBinaryStreams = 2 + Math.floor(Math.random() * 3);
       
       const elements = [];
       
-      // Add random symbols
       for (let i = 0; i < numSymbols; i++) {
         const symbol = glitchSymbols[Math.floor(Math.random() * glitchSymbols.length)];
         elements.push({
           type: 'symbol',
           content: symbol,
-          top: Math.random() * 140 - 20, // -20% to 120%
-          left: Math.random() * 140 - 20, // -20% to 120%
-          size: 1 + Math.random() * 2, // 1-3rem
+          top: Math.random() * 140 - 20,
+          left: Math.random() * 140 - 20,
+          size: 1 + Math.random() * 2,
           delay: Math.random() * 3,
           duration: 1 + Math.random() * 3,
           inverse: Math.random() > 0.5,
@@ -489,7 +743,6 @@ function About() {
         });
       }
       
-      // Add random glitch text
       for (let i = 0; i < numTextElements; i++) {
         const text = glitchText[Math.floor(Math.random() * glitchText.length)];
         elements.push({
@@ -497,7 +750,7 @@ function About() {
           content: text,
           top: Math.random() * 140 - 20,
           left: Math.random() * 140 - 20,
-          size: 0.5 + Math.random() * 0.8, // 0.5-1.3rem
+          size: 0.5 + Math.random() * 0.8,
           delay: Math.random() * 2.5,
           duration: 2 + Math.random() * 2,
           inverse: Math.random() > 0.7,
@@ -507,7 +760,6 @@ function About() {
         });
       }
       
-      // Add code matrix elements
       for (let i = 0; i < numCodeElements; i++) {
         const code = codePatterns[Math.floor(Math.random() * codePatterns.length)];
         elements.push({
@@ -515,11 +767,10 @@ function About() {
           content: code,
           left: Math.random() * 100,
           delay: Math.random() * 3,
-          size: 0.5 + Math.random() * 0.5, // 0.5-1rem
+          size: 0.5 + Math.random() * 0.5,
         });
       }
       
-      // Add binary streams
       for (let i = 0; i < numBinaryStreams; i++) {
         elements.push({
           type: 'binary',
@@ -533,12 +784,11 @@ function About() {
       return elements;
     };
     
-    // Generate initial elements and set up a timer to regenerate them
     setGlitchElements(generateRandomGlitchElements());
     
     const intervalId = setInterval(() => {
       setGlitchElements(generateRandomGlitchElements());
-    }, 5000); // Regenerate every 5 seconds
+    }, 5000);
     
     return () => clearInterval(intervalId);
   }, []);
@@ -555,7 +805,6 @@ function About() {
         </Typography>
       </Grid>
       <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center' }}>
-        {/* SVG filters for RGB channel separation and distortion */}
         <svg width="0" height="0" style={{ position: 'absolute', top: 0, left: 0 }}>
           <defs>
             <filter id="redChannel">
@@ -631,12 +880,10 @@ function About() {
             }}
           />
           
-          {/* RGB Channel clones for the splitting effect */}
           <AvatarGlitchClone image={profilePath} className="red avatar-glitch-clone" />
           <AvatarGlitchClone image={profilePath} className="green avatar-glitch-clone" />
           <AvatarGlitchClone image={profilePath} className="blue avatar-glitch-clone" />
           
-          {/* Random glitch symbols container */}
           <Box className="glitch-symbol-container">
             {glitchElements.map((element, index) => {
               if (element.type === 'symbol' || element.type === 'text') {
@@ -683,13 +930,10 @@ function About() {
             })}
           </Box>
           
-          {/* Scan lines effect */}
           <ScanLines className="scan-lines" />
           
-          {/* Flare effect */}
           <Flare className="flare-effect" />
           
-          {/* Tearing effect */}
           <TearingContainer className="tearing-container">
             {tearLines.map((line, index) => (
               <TearLine 
@@ -701,6 +945,8 @@ function About() {
               />
             ))}
           </TearingContainer>
+          
+          <GlitchySurround />
         </GlitchyAvatarWrapper>
       </Grid>
     </Grid>
