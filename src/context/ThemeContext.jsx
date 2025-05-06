@@ -2,6 +2,7 @@
 import { createContext, useMemo, useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Box } from '@mui/material';
 
 export const ThemeContext = createContext();
 
@@ -173,16 +174,27 @@ export function CustomThemeProvider({ children }) {
     return savedTheme || 'light';
   });
 
+  // Add transition state
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   // Effect to sync with localStorage when theme changes
   useEffect(() => {
     localStorage.setItem('theme-mode', mode);
   }, [mode]);
 
   const toggleTheme = () => {
-    setMode((prev) => {
-      const newMode = prev === 'light' ? 'dark' : 'light';
-      return newMode;
-    });
+    // Start transition effect
+    setIsTransitioning(true);
+
+    // Wait briefly then change theme
+    setTimeout(() => {
+      setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+
+      // End transition effect after theme has changed
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 400); // Slightly shorter than the CSS transition for smooth effect
+    }, 100);
   };
 
   const theme = useMemo(() => (mode === 'light' ? lightTheme : darkTheme), [mode]);
@@ -191,6 +203,21 @@ export function CustomThemeProvider({ children }) {
     <ThemeContext.Provider value={{ mode, toggleTheme }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        {/* Transition overlay that fades in/out during theme change */}
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: mode === 'light' ? 'rgba(248, 247, 243, 0.7)' : 'rgba(18, 18, 18, 0.7)',
+            opacity: isTransitioning ? 1 : 0,
+            zIndex: isTransitioning ? 9999 : -1, // Show above everything during transition
+            pointerEvents: 'none', // Make sure clicks pass through
+            transition: 'opacity 500ms ease',
+          }}
+        />
         {children}
       </ThemeProvider>
     </ThemeContext.Provider>

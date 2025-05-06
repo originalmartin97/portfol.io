@@ -65,3 +65,33 @@ a {
     scroll-margin-top: 64px; /* adjusted for smaller navbar on mobile */
   }
 }
+
+/* Smooth theme transitions for all elements */
+body, 
+.MuiPaper-root, 
+.MuiAppBar-root, 
+.MuiCard-root, 
+.MuiTypography-root, 
+.MuiChip-root,
+.MuiListItem-root,
+.MuiContainer-root,
+.MuiBox-root,
+.MuiGrid-root,
+.MuiDivider-root,
+.MuiIconButton-root,
+.MuiButton-root {
+  transition: background-color 500ms ease, 
+              color 500ms ease,
+              border-color 500ms ease,
+              box-shadow 500ms ease !important;
+}
+
+/* Special handling for the main container */
+#root > .MuiContainer-root {
+  transition: background-color 500ms ease;
+}
+
+/* Ensure text transitions smoothly too */
+* {
+  transition: color 500ms ease;
+}
