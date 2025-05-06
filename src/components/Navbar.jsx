@@ -95,12 +95,33 @@ function Navbar() {
           isDynamic={true}
           style={{ textDecoration: 'none' }}
         >
-          <Button sx={{ 
+          <Button className="nav-button" sx={{ 
             color: mode === 'light' ? 'text.primary' : 'white',
             fontWeight: 400,
             letterSpacing: '0.5px',
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: '0',
+              left: '0',
+              width: '100%',
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent, #2196f3, transparent)',
+              transform: 'scaleX(0)',
+              transition: 'transform 0.3s ease',
+            },
+            '&:hover::after': {
+              transform: 'scaleX(0.8)',
+            },
             '&.active': {
               fontWeight: 500,
+              '&::after': {
+                transform: 'scaleX(0.8)',
+                background: mode === 'light' 
+                  ? 'linear-gradient(90deg, transparent, #2196f3 80%, #00e676)' 
+                  : 'linear-gradient(90deg, transparent, #2196f3 80%, #69f0ae)',
+              }
             }
           }}>
             {label}

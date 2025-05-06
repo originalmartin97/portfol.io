@@ -20,8 +20,44 @@ a {
   text-decoration: none;
 }
 
-.active button {
+/* Tech-savvy active navigation styling */
+.active .nav-button {
   font-weight: 500 !important;
+  position: relative;
+}
+
+.active .nav-button::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(33, 150, 243, 0.3) 20%, 
+    rgba(33, 150, 243, 0.8) 50%, 
+    rgba(0, 230, 118, 0.8) 80%, 
+    transparent 100%
+  );
+  animation: glitchLine 2s infinite linear;
+}
+
+@keyframes glitchLine {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 @media (max-width: 600px) {
