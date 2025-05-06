@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 8 }}>
+      <Container maxWidth="lg" sx={{ mt: 0 }}>
         <Box 
           id="about" 
           sx={{ 
