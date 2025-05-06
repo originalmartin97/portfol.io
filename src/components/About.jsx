@@ -440,8 +440,10 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
       animation: `${glitchyBorder2} 7s infinite cubic-bezier(0.36, 0, 0.66, 1) reverse`,
       animationDelay: '0.3s',
     },
+    // Apply shape-shifting animations to the avatar
     '.MuiAvatar-root': {
-      animation: `${severeBrokenAnimation} 3s infinite alternate`,
+      animation: `${severeBrokenAnimation} 3s infinite alternate, ${shapeShift} 7s infinite`,
+      borderRadius: '0', // Remove default circular border to allow shape-shifting
       filter: 'contrast(1.2)',
       '&::before': {
         content: '""',
@@ -453,7 +455,7 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
         background: 'linear-gradient(45deg, transparent, rgba(255,0,0,0.7), transparent, rgba(0,255,255,0.7), transparent)',
         backgroundSize: '400% 400%',
         mixBlendMode: 'color-dodge',
-        animation: `${staticNoise} 0.3s infinite steps(5)`,
+        animation: `${staticNoise} 0.3s infinite steps(5), ${digitalBreak} 4s infinite steps(1)`,
         opacity: 0.7,
         zIndex: 3,
       },
@@ -461,7 +463,7 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
         content: '""',
         position: 'absolute',
         inset: 0,
-        borderRadius: '50%',
+        borderRadius: 'inherit', // Match the changing border radius
         border: '3px solid transparent',
         background: 'linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000)',
         backgroundSize: '400% 100%',
@@ -481,20 +483,25 @@ const GlitchyAvatarWrapper = styled(Box)(({ theme }) => ({
       opacity: 1,
       '& .tear-line': { opacity: 1 },
     },
+    // Apply shape-shifting animations to RGB clones
     '.avatar-glitch-clone': {
       opacity: 0.7,
-      animation: `${rgbSplitEffect} 2s infinite alternate`,
+      borderRadius: '0', // Remove default circular border
       '&.red': {
-        animation: `${tearingEffect} 0.5s infinite ease-in-out`,
+        animation: `${tearingEffect} 0.5s infinite ease-in-out, ${jagggedShape} 9s infinite alternate`,
       },
       '&.green': {
-        animation: `${tearingEffect} 0.4s 0.1s infinite ease-in-out reverse`,
+        animation: `${tearingEffect} 0.4s 0.1s infinite ease-in-out reverse, ${shapeShift} 8s infinite alternate-reverse`,
       },
       '&.blue': {
-        animation: `${tearingEffect} 0.6s 0.2s infinite ease-in-out`,
+        animation: `${tearingEffect} 0.6s 0.2s infinite ease-in-out, ${rgbSplitEffect} 2s infinite alternate`,
       }
     },
     '.glitch-symbol-container': { opacity: 1 },
+    '.glitchy-surround': { 
+      opacity: 1,
+      animation: `${voidPulse} 1.5s infinite cubic-bezier(0.36, 0, 0.66, -0.56)`,
+    }
   },
   '.glitch-symbol-container': {
     position: 'absolute',
@@ -552,11 +559,12 @@ const AvatarGlitchClone = styled('div')(({ theme, image }) => ({
   backgroundImage: `url(${image})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  borderRadius: '50%',
+  // Remove borderRadius: '50%' to allow shape changes
   opacity: 0,
   zIndex: 1,
   mixBlendMode: 'screen',
   transition: 'opacity 0.2s',
+  overflow: 'hidden', // Hide overflow during shape changes
   '&.red': {
     filter: 'url(#redChannel)',
     transform: 'translate(-5%, -2%)',
