@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 export const ThemeContext = createContext();
 
-// Define vibrant skill chip colors for tech-savvy look
+// Keep skill chip colors as they are - they add nice visual interest
 const skillChipColors = {
   warning: {
     main: '#ff9800',
@@ -42,15 +42,16 @@ const skillChipColors = {
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
-    background: { default: '#f5f5f5' },
+    background: { default: '#f8f7f3' }, // Adjusted to match the cream color in image
+    paper: { default: '#f8f7f3' },
     primary: {
-      main: '#000000',
+      main: '#000000', // Keep black for main elements
     },
     text: {
       primary: '#000000',
       secondary: '#333333',
     },
-    // Add our custom skill chip colors
+    // Keep all skill chip colors
     ...skillChipColors
   },
   typography: {
@@ -75,7 +76,7 @@ const lightTheme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: '#000000',
+          borderColor: 'rgba(0,0,0,0.12)', // Lighter divider that matches the design
         },
       },
     },
@@ -103,7 +104,7 @@ const darkTheme = createTheme({
     primary: {
       main: '#ffffff',
     },
-    // Add our custom skill chip colors - slightly brighter for dark mode
+    // Keep the skill chip colors for dark mode
     warning: {
       main: '#ffb74d',
       light: '#ffd54f',
@@ -157,7 +158,7 @@ const darkTheme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: '#ffffff',
+          borderColor: 'rgba(255,255,255,0.12)',
         },
       },
     },
