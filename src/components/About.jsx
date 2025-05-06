@@ -1,42 +1,30 @@
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { Typography, Box, Grid, Avatar } from '@mui/material';
 import about from '../data/about';
 
 function About() {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Card sx={{ 
-        width: { xs: '95%', sm: '80%', md: 600 }, 
-        maxWidth: '100%', 
-        boxShadow: 5 
-      }}>
-        <CardMedia
-          component="img"
-          sx={{
-            height: { xs: 200, sm: 250, md: 300 },
-            objectFit: 'cover',
-          }}
-          image={about.profilePic}
+    <Grid container spacing={4} alignItems="center">
+      <Grid item xs={12} md={7}>
+        <Typography variant="h1" component="h1" gutterBottom sx={{ fontWeight: 500 }}>
+          Hello, I'm<br/>
+          {about.name}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          {about.bio}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Avatar
+          src={about.profilePic}
           alt={about.name}
+          sx={{
+            width: { xs: 200, md: 300 },
+            height: { xs: 200, md: 300 },
+            boxShadow: 3
+          }}
         />
-        <CardContent>
-          <Typography 
-            gutterBottom 
-            variant="h4" 
-            component="div" 
-            sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } }}
-          >
-            {about.name}
-          </Typography>
-          <Typography 
-            variant="body1" 
-            color="text.secondary"
-            sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
-          >
-            {about.bio}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 

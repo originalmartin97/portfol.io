@@ -63,7 +63,13 @@ function Navbar() {
                   duration={500}
                   style={{ width: '100%', padding: '12px 16px' }}
                 >
-                  <Button sx={{ color: mode === 'light' ? 'primary.main' : 'white', width: '100%', justifyContent: 'flex-start' }}>
+                  <Button sx={{ 
+                    color: mode === 'light' ? 'text.primary' : 'white', 
+                    width: '100%', 
+                    justifyContent: 'flex-start',
+                    fontWeight: 400,
+                    letterSpacing: '0.5px'
+                  }}>
                     {label}
                   </Button>
                 </Link>
@@ -76,7 +82,7 @@ function Navbar() {
   );
 
   const desktopMenu = (
-    <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }}>
+    <Stack direction="row" spacing={4} sx={{ flexGrow: 1 }}>
       {navLinks.map(({ label, to }) => (
         <Link
           key={to}
@@ -89,14 +95,30 @@ function Navbar() {
           isDynamic={true}
           style={{ textDecoration: 'none' }}
         >
-          <Button sx={{ color: 'white' }}>{label}</Button>
+          <Button sx={{ 
+            color: mode === 'light' ? 'text.primary' : 'white',
+            fontWeight: 400,
+            letterSpacing: '0.5px',
+            '&.active': {
+              fontWeight: 500,
+            }
+          }}>
+            {label}
+          </Button>
         </Link>
       ))}
     </Stack>
   );
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: 'black' }}>
+    <AppBar 
+      position="sticky" 
+      elevation={0}
+      sx={{ 
+        backgroundColor: mode === 'light' ? 'background.default' : 'black',
+        borderBottom: mode === 'light' ? '1px solid #e0e0e0' : 'none' 
+      }}
+    >
       <Toolbar>
         {isMobile ? mobileMenu : desktopMenu}
         <Box sx={{ flexGrow: isMobile ? 1 : 0, textAlign: isMobile ? 'right' : 'inherit' }}>

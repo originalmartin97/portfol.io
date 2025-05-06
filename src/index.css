@@ -7,8 +7,6 @@ html {
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #121212;
-  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,15 +21,11 @@ a {
 }
 
 .active button {
-  border-bottom: 2px solid #2196f3; /* blue underline on active nav link */
+  font-weight: 500 !important;
 }
 
 @media (max-width: 600px) {
   section {
     scroll-margin-top: 64px; /* adjusted for smaller navbar on mobile */
-  }
-  
-  .active button {
-    border-bottom: 1px solid #2196f3; /* smaller underline on mobile */
   }
 }

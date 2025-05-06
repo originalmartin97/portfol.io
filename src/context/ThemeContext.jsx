@@ -9,6 +9,40 @@ const lightTheme = createTheme({
   palette: {
     mode: 'light',
     background: { default: '#f5f5f5' },
+    primary: {
+      main: '#000000',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#333333',
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontSize: '3.5rem',
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+      marginBottom: '1rem',
+    },
+    h4: {
+      fontWeight: 500,
+    },
+    body1: {
+      lineHeight: 1.6,
+    },
+  },
+  components: {
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: '#000000',
+        },
+      },
+    },
   },
 });
 
@@ -16,18 +50,42 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: { default: '#121212' },
+    primary: {
+      main: '#ffffff',
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontSize: '3.5rem',
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: '2.5rem',
+      fontWeight: 500,
+      marginBottom: '1rem',
+    },
+    h4: {
+      fontWeight: 500,
+    },
+    body1: {
+      lineHeight: 1.6,
+    },
+  },
+  components: {
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: '#ffffff',
+        },
+      },
+    },
   },
 });
 
 export function CustomThemeProvider({ children }) {
+  // Start with light theme by default to match the reference design
   const [mode, setMode] = useState('light');
-
-  // Auto-detect time of day on first load
-  useEffect(() => {
-    const hour = new Date().getHours();
-    const prefersDark = hour < 7 || hour > 19;
-    setMode(prefersDark ? 'dark' : 'light');
-  }, []);
 
   const toggleTheme = () => {
     setMode((prev) => (prev === 'light' ? 'dark' : 'light'));

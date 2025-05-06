@@ -1,61 +1,53 @@
-import { Box, Typography, Stack, IconButton, Link } from '@mui/material';
+import { Box, Typography, Stack, IconButton } from '@mui/material';
 import { Email, LinkedIn, GitHub } from '@mui/icons-material';
 import contact from '../data/contact';
 
 function Contact() {
   return (
     <Box>
-      <Typography 
-        variant="h4" 
-        gutterBottom
-        sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } }}
-      >
-        Contact Me
+      <Typography variant="h2" component="h2" gutterBottom>
+        Contact
       </Typography>
-      <Typography 
-        variant="body1" 
-        gutterBottom
-        sx={{ fontSize: { xs: '0.875rem', sm: '1rem' }, mb: { xs: 2, md: 3 } }}
-      >
-        Feel free to reach out to me via email or connect on my socials:
+      <Typography variant="body1" paragraph sx={{ mb: 4 }}>
+        Provide contact information. Links to social media profiles.
       </Typography>
-      <Stack 
-        direction="row" 
-        spacing={{ xs: 1, sm: 2 }}
-        sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }}
-      >
+      
+      <Stack direction="row" spacing={2}>
         <IconButton
-          component={Link}
           href={`mailto:${contact.email}`}
-          color="primary"
           aria-label="Email"
-          sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
+          sx={{ 
+            color: 'text.primary',
+            p: 1
+          }}
         >
-          <Email fontSize="inherit" />
+          <Email fontSize="large" />
         </IconButton>
 
         <IconButton
-          component={Link}
           href={contact.linkedIn}
           target="_blank"
           rel="noopener noreferrer"
-          color="primary"
           aria-label="LinkedIn"
-          sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
+          sx={{ 
+            color: 'text.primary',
+            p: 1
+          }}
         >
-          <LinkedIn fontSize="inherit" />
+          <LinkedIn fontSize="large" />
         </IconButton>
 
         <IconButton
-          component={Link}
           href={contact.github}
           target="_blank"
           rel="noopener noreferrer"
-          color="primary"
           aria-label="GitHub"
-          sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
+          sx={{ 
+            color: 'text.primary',
+            p: 1
+          }}
         >
-          <GitHub fontSize="inherit" />
+          <GitHub fontSize="large" />
         </IconButton>
       </Stack>
     </Box>

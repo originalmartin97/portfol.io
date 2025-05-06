@@ -3,26 +3,26 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Divider } from '@mui/material';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Box 
           id="about" 
           sx={{ 
             py: { xs: 4, sm: 6 }, 
             px: { xs: 2, sm: 4, md: 6 }, 
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center'
+            minHeight: '80vh',
           }}
         >
           <About />
         </Box>
+        
+        <Divider />
         
         <Box 
           id="projects" 
@@ -30,11 +30,13 @@ function App() {
             py: { xs: 4, sm: 6 }, 
             px: { xs: 2, sm: 4, md: 6 }, 
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '100vh' 
+            minHeight: '80vh' 
           }}
         >
           <Projects />
         </Box>
+        
+        <Divider />
         
         <Box 
           id="skills" 
@@ -42,11 +44,13 @@ function App() {
             py: { xs: 4, sm: 6 }, 
             px: { xs: 2, sm: 4, md: 6 }, 
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '100vh' 
+            minHeight: '60vh' 
           }}
         >
           <Skills />
         </Box>
+        
+        <Divider />
         
         <Box 
           id="contact" 
@@ -54,7 +58,7 @@ function App() {
             py: { xs: 4, sm: 6 }, 
             px: { xs: 2, sm: 4, md: 6 }, 
             scrollMarginTop: { xs: '64px', sm: '80px' }, 
-            minHeight: '100vh' 
+            minHeight: '60vh' 
           }}
         >
           <Contact />

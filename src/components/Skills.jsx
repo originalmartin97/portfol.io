@@ -1,36 +1,33 @@
-import { Box, Chip, Typography, Stack } from '@mui/material';
+import { Box, Chip, Typography, Grid } from '@mui/material';
 import skills from '../data/skills';
 
 function Skills() {
   return (
     <Box>
-      <Typography 
-        variant="h4" 
-        gutterBottom
-        sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' }, mb: { xs: 2, md: 3 } }}
-      >
-        My Skills
+      <Typography variant="h2" component="h2" gutterBottom>
+        Skills
       </Typography>
-      <Stack 
-        direction="row" 
-        spacing={{ xs: 1, sm: 2 }} 
-        flexWrap="wrap"
-        sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }}
-      >
+      <Typography variant="body1" paragraph sx={{ mb: 4 }}>
+        List relevant technical and other skills. Visually appealing presentation.
+      </Typography>
+      
+      <Grid container spacing={2}>
         {skills.map((skill, index) => (
-          <Chip
-            key={index}
-            label={skill.label}
-            color={skill.color}
-            variant="filled"
-            sx={{ 
-              m: 0.5, 
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-              height: { xs: '28px', sm: '32px' } 
-            }}
-          />
+          <Grid item key={index}>
+            <Chip
+              label={skill.label}
+              variant="outlined"
+              sx={{ 
+                borderColor: 'text.primary',
+                color: 'text.primary',
+                borderRadius: '4px',
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+                height: { xs: '32px', sm: '36px' } 
+              }}
+            />
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </Box>
   );
 }
