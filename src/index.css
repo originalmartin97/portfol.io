@@ -1,0 +1,26 @@
+/* src/index.css */
+
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: white;
+  }
+  
+  section {
+    scroll-margin-top: 80px; /* prevents content hiding under sticky navbar */
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .active button {
+    border-bottom: 2px solid #2196f3; /* blue underline on active nav link */
+  }
+  

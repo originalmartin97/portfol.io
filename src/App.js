@@ -1,32 +1,27 @@
-// src/App.js
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Container, AppBar, Toolbar, Button } from '@mui/material';
+import Navbar from './components/Navbar';
 import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import { Box } from '@mui/material';
 
 function App() {
   return (
-    <Router>
-      <AppBar position="static">
-        <Toolbar>
-          <Button color="inherit" component={Link} to="/">About</Button>
-          <Button color="inherit" component={Link} to="/projects">Projects</Button>
-          <Button color="inherit" component={Link} to="/skills">Skills</Button>
-          <Button color="inherit" component={Link} to="/contact">Contact</Button>
-        </Toolbar>
-      </AppBar>
-
-      <Container sx={{ mt: 4 }}>
-        <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Container>
-    </Router>
+    <>
+      <Navbar />
+      <Box id="about" sx={{ p: 6, scrollMarginTop: '80px', minHeight: '100vh' }}>
+        <About />
+      </Box>
+      <Box id="projects" sx={{ p: 6, scrollMarginTop: '80px', minHeight: '100vh' }}>
+        <Projects />
+      </Box>
+      <Box id="skills" sx={{ p: 6, scrollMarginTop: '80px', minHeight: '100vh' }}>
+        <Skills />
+      </Box>
+      <Box id="contact" sx={{ p: 6, scrollMarginTop: '80px', minHeight: '100vh' }}>
+        <Contact />
+      </Box>
+    </>
   );
 }
 
