@@ -4,11 +4,13 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import { Box, Container, Divider } from '@mui/material';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
     <>
       <Navbar />
+      <Analytics />
       <Container 
         maxWidth="lg" 
         sx={{ 
