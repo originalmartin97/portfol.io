@@ -192,9 +192,9 @@ function Skills() {
         Skills
       </Typography>
       <Typography variant="body1" paragraph sx={{ mb: 4 }}>
-        Here are some of the skills I have acquired over the years. I am always eager to learn new technologies and improve my skill set.
-        I have experience with a variety of programming languages, frameworks, and tools. My goal is to continuously grow as a developer and stay up-to-date with the latest trends in technology.
-        I am particularly interested in web development, cloud computing, and machine learning. I enjoy working on challenging projects that push my limits and allow me to explore new ideas.
+        Here are some of the skills I have acquired/experienced over my career and have an understanding of them in general. I am always eager to learn new technologies and improve my skill set.
+        I have experience with a variety of tools and technologies. My goal is to continuously grow as a IT enthusiast person and stay up-to-date with the latest trends in technology.
+        I am particularly interested in machine learning and systematic frameworks. I enjoy working on challenging projects that push my limits and allow me to explore new ideas, perspectives and solutions.
       </Typography>
       
       <Grid container spacing={2}>
