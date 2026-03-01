@@ -1,4 +1,4 @@
-import { Typography, Box, Grid, Avatar } from '@mui/material';
+import { Typography, Box, Grid, Avatar, Chip } from '@mui/material';
 import { keyframes, styled } from '@mui/system';
 import { useState, useEffect } from 'react';
 import about from '../data/about';
@@ -802,7 +802,56 @@ function About() {
   }, []);
 
   return (
-    <Grid container spacing={{ xs: 2, sm: 4 }} alignItems="center">
+    <>
+      {/* TL;DR Section */}
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h5" component="h2" gutterBottom 
+          sx={{ 
+            fontWeight: 600,
+            fontSize: { xs: '1.2rem', sm: '1.5rem' },
+            mb: 2,
+            color: 'primary.main'
+          }}
+        >
+          TL;DR
+        </Typography>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            flexWrap: 'wrap', 
+            gap: 1.5,
+            maxWidth: '100%'
+          }}
+        >
+          {about.tldr.map((item, index) => (
+            <Chip
+              key={index}
+              label={item}
+              variant="outlined"
+              sx={{
+                fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                height: 'auto',
+                py: 0.5,
+                px: 1,
+                borderRadius: 2,
+                borderColor: 'primary.main',
+                color: 'primary.main',
+                backgroundColor: 'transparent',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  backgroundColor: 'primary.main',
+                  color: 'primary.contrastText',
+                  transform: 'translateY(-2px)',
+                  boxShadow: 2
+                }
+              }}
+            />
+          ))}
+        </Box>
+      </Box>
+
+      {/* Main About Content */}
+      <Grid container spacing={{ xs: 2, sm: 4 }} alignItems="center">
       <Grid item xs={12} md={7}>
         <Typography variant="h1" component="h1" gutterBottom 
           sx={{ 
@@ -964,6 +1013,7 @@ function About() {
         </GlitchyAvatarWrapper>
       </Grid>
     </Grid>
+    </>
   );
 }
 
