@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Button, Stack, IconButton, useMediaQuery, Drawer, List, ListItem, Box } from '@mui/material';
-import { Link, Events, scrollSpy, scroller } from 'react-scroll';
+import { Events, scrollSpy, scroller } from 'react-scroll';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 import { LightMode, DarkMode, Menu } from '@mui/icons-material';
