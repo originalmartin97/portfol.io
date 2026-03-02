@@ -102,9 +102,6 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: { default: '#121212' },
-    primary: {
-      main: '#ffffff',
-    },
     // Keep the skill chip colors for dark mode
     warning: {
       main: '#ffb74d',
